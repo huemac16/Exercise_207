@@ -1,16 +1,33 @@
-
 package GUI;
 
+import BL.WeatherStation;
+import javax.swing.JOptionPane;
 
 public class Dialog extends javax.swing.JDialog {
 
-    
+    private WeatherStation s;
+    private boolean ok;
+
+    public WeatherStation getS() {
+        return s;
+    }
+
+    public boolean isOk() {
+        return ok;
+    }
+
     public Dialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
 
-  
+//    public void showStation(WeatherStation s) {
+//        tfHumi.setText("" + s.getHumi());
+//        tfPlace.setText(s.getPlace());
+//        tfSeaLevel.setText("" + s.getSeaLevel());
+//        tfTemp.setText("" + s.getTemperature());
+//    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -130,11 +147,20 @@ public class Dialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOkActionPerformed
-        
+        ok = true;
+        try {
+            s = new WeatherStation(tfPlace.getText(), Integer.parseInt(tfSeaLevel.getText()),
+                    Double.parseDouble(tfTemp.getText()), Integer.parseInt(tfHumi.getText()));
+            dispose();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Fehlerhafte Eingabe!");
+        }
+
     }//GEN-LAST:event_btOkActionPerformed
 
     private void btCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelActionPerformed
-        
+        ok = false;
+        this.dispose();
     }//GEN-LAST:event_btCancelActionPerformed
 
     /**

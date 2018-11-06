@@ -1,14 +1,64 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package BL;
 
-/**
- *
- * @author marce
- */
-public class WeatherStation {
-    
+import java.io.Serializable;
+
+public class WeatherStation implements Serializable {
+
+    private String place;
+    private int seaLevel;
+    private double temperature;
+    private int humi;
+
+    public WeatherStation(String place, int seaLevel, double temperature, int humi) {
+        this.place = place;
+        this.seaLevel = seaLevel;
+        this.temperature = temperature;
+        this.humi = humi;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+
+    public int getSeaLevel() {
+        return seaLevel;
+    }
+
+    public void setSeaLevel(int seaLevel) {
+        this.seaLevel = seaLevel;
+    }
+
+    public double getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(double temperature) throws Exception {
+        if (temperature >= -35 && temperature <= 45) {
+            this.temperature = temperature;
+        } else {
+            throw new Exception("Keine gültige Temperatur");
+        }
+
+    }
+
+    public int getHumi() {
+        return humi;
+    }
+
+    public void setHumi(int humi) throws Exception{
+        if(humi >= 0 && humi <= 100)
+        {
+           this.humi = humi; 
+        }
+        else
+        {
+            
+        }
+        
+    }
+
 }
