@@ -9,11 +9,16 @@ public class WeatherStation implements Serializable {
     private double temperature;
     private int humi;
 
-    public WeatherStation(String place, int seaLevel, double temperature, int humi) {
-        this.place = place;
-        this.seaLevel = seaLevel;
-        this.temperature = temperature;
-        this.humi = humi;
+    public WeatherStation(String place, int seaLevel, double temperature, int humi) throws Exception {
+        if (temperature >= -35 && temperature <= 45 && humi >= 0 && humi <= 100) {
+            this.place = place;
+            this.seaLevel = seaLevel;
+            this.temperature = temperature;
+            this.humi = humi;
+        } else {
+            throw new Exception("No valid values");
+        }
+
     }
 
     public String getPlace() {
@@ -40,7 +45,7 @@ public class WeatherStation implements Serializable {
         if (temperature >= -35 && temperature <= 45) {
             this.temperature = temperature;
         } else {
-            throw new Exception("Keine gültige Temperatur");
+            throw new Exception("Not a valid temperature");
         }
 
     }
@@ -49,16 +54,13 @@ public class WeatherStation implements Serializable {
         return humi;
     }
 
-    public void setHumi(int humi) throws Exception{
-        if(humi >= 0 && humi <= 100)
-        {
-           this.humi = humi; 
+    public void setHumi(int humi) throws Exception {
+        if (humi >= 0 && humi <= 100) {
+            this.humi = humi;
+        } else {
+            throw new Exception("Not a valid Humidity");
         }
-        else
-        {
-            
-        }
-        
+
     }
 
 }

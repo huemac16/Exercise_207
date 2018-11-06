@@ -1,5 +1,6 @@
 package BL;
 
+import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -11,6 +12,16 @@ public class TableCellRenderer implements javax.swing.table.TableCellRenderer {
         WeatherStation s = (WeatherStation) o;
         JLabel label = new JLabel();
         label.setOpaque(true);
+
+        if (s.getTemperature() > 25 && s.getHumi() < 20) {
+            label.setBackground(Color.YELLOW);
+        } else if (s.getTemperature() < 0 && s.getHumi() < 30) {
+            label.setBackground(Color.BLUE);
+        } else if (s.getTemperature() >= 0 && s.getTemperature() <= 25 && s.getHumi() > 50) {
+            label.setBackground(Color.GREEN);
+        }
+        
+        label.setBackground(bln ? Color.DARK_GRAY : label.getBackground());
 
         switch (i1) {
             case 0:

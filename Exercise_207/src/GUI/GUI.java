@@ -2,22 +2,35 @@ package GUI;
 
 import BL.TableCellRenderer;
 import BL.TableModel;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class GUI extends javax.swing.JFrame {
 
     private TableModel bl = new TableModel();
+    private File f = new File("/save.ser");
 
-    public GUI() {
+    public GUI() throws IOException {
         initComponents();
         table.setModel(bl);
         table.setDefaultRenderer(Object.class, new TableCellRenderer());
+
+        if (!(f.exists())) {
+            f.createNewFile();
+        }
+
+        bl.load(f);
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        miHide = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         menueBar = new javax.swing.JMenuBar();
@@ -28,7 +41,15 @@ public class GUI extends javax.swing.JFrame {
         miTemp = new javax.swing.JMenuItem();
         miHumi = new javax.swing.JMenuItem();
 
+        miHide.setText("Ausblenden");
+        jPopupMenu1.add(miHide);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -54,6 +75,11 @@ public class GUI extends javax.swing.JFrame {
         mStations.add(miAdd);
 
         miRemove.setText("Remove Weather Station");
+        miRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miRemoveActionPerformed(evt);
+            }
+        });
         mStations.add(miRemove);
 
         menueBar.add(mStations);
@@ -105,11 +131,34 @@ public class GUI extends javax.swing.JFrame {
 
     private void miTempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTempActionPerformed
         double newTemp = Double.parseDouble(JOptionPane.showInputDialog(this, "New Temperature:"));
+        try {
+            bl.changeTemp(table.getSelectedRow(), newTemp);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }//GEN-LAST:event_miTempActionPerformed
 
     private void miHumiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miHumiActionPerformed
         int newHumi = Integer.parseInt(JOptionPane.showInputDialog(this, "New Humidity:"));
+        try {
+            bl.changeHumi(table.getSelectedRow(), newHumi);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }//GEN-LAST:event_miHumiActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        try {
+            bl.save(f);
+        } catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowClosing
+
+    private void miRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRemoveActionPerformed
+        int[] values = table.getSelectedRows();
+        bl.remove(values);
+    }//GEN-LAST:event_miRemoveActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -138,17 +187,23 @@ public class GUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUI().setVisible(true);
+                try {
+                    new GUI().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenu mStations;
     private javax.swing.JMenu mValues;
     private javax.swing.JMenuBar menueBar;
     private javax.swing.JMenuItem miAdd;
+    private javax.swing.JMenuItem miHide;
     private javax.swing.JMenuItem miHumi;
     private javax.swing.JMenuItem miRemove;
     private javax.swing.JMenuItem miTemp;
