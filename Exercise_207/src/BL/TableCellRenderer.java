@@ -20,22 +20,37 @@ public class TableCellRenderer implements javax.swing.table.TableCellRenderer {
         } else if (s.getTemperature() >= 0 && s.getTemperature() <= 25 && s.getHumi() > 50) {
             label.setBackground(Color.GREEN);
         }
-        
+
         label.setBackground(bln ? Color.DARK_GRAY : label.getBackground());
 
-        switch (i1) {
-            case 0:
-                label.setText(s.getPlace());
-                break;
-            case 1:
-                label.setText(s.getSeaLevel() + "m");
-                break;
-            case 2:
-                label.setText(String.format("%.1f°", s.getTemperature()));
-                break;
-            case 3:
-                label.setText(s.getHumi() + "%");
-                break;
+        if (TableModel.def) {
+            switch (i1) {
+                case 0:
+                    label.setText(s.getPlace());
+                    break;
+                case 1:
+                    label.setText(s.getSeaLevel() + "m");
+                    break;
+                case 2:
+                    label.setText(String.format("%.1f°", s.getTemperature()));
+                    break;
+                case 3:
+                    label.setText(s.getHumi() + "%");
+                    break;
+            }
+        } else {
+            switch (i1) {
+                case 0:
+                    label.setText(s.getPlace());
+                    break;
+                case 1:
+                    label.setText(String.format("%.1f°", s.getTemperature()));
+                    break;
+                case 2:
+                    label.setText(s.getHumi() + "%");
+                    break;
+            }
+
         }
 
         return label;

@@ -17,16 +17,32 @@ public class TableModel extends AbstractTableModel {
 
     private static String[] colNames = {"Place", "Sea Level", "Temperature", "rel. Humidity"};
 
+    public static boolean def = true;
+
     public void add(WeatherStation s) {
         stations.add(s);
         sortList();
     }
 
     public void remove(int[] values) {
+        System.out.println("" + values.length);
+
         for (int i = 0; i < values.length; i++) {
-            stations.remove(values[i]);
+            stations.remove(values[i] - i);
         }
         sortList();
+    }
+
+    public void changeCols(boolean yes) {
+        if (yes) {
+            colNames = new String[]{"Place", "Temperature", "rel. Humidity"};
+            def = false;
+        } else {
+            colNames = new String[]{"Place", "Sea Level", "Temperature", "rel. Humidity"};
+            def = true;
+        }
+
+        fireTableStructureChanged();
     }
 
     public void changeTemp(int idx, double newTmp) throws Exception {
@@ -67,9 +83,13 @@ public class TableModel extends AbstractTableModel {
 
     public void save(File f) throws FileNotFoundException, IOException {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
-        for (WeatherStation s : stations) {
-            oos.writeObject(s);
+//        for (WeatherStation s : stations) {
+//            oos.writeObject(s);
+//
+//        }
 
+        for (int i = 0; i < stations.size(); i++) {
+            oos.writeObject(stations.get(i));
         }
 
         oos.flush();
@@ -86,6 +106,7 @@ public class TableModel extends AbstractTableModel {
             sortList();
 
         } catch (Exception e) {
+
         }
 
         ois.close();

@@ -10,14 +10,11 @@ public class WeatherStation implements Serializable {
     private int humi;
 
     public WeatherStation(String place, int seaLevel, double temperature, int humi) throws Exception {
-        if (temperature >= -35 && temperature <= 45 && humi >= 0 && humi <= 100) {
-            this.place = place;
-            this.seaLevel = seaLevel;
-            this.temperature = temperature;
-            this.humi = humi;
-        } else {
-            throw new Exception("No valid values");
-        }
+
+        this.place = place;
+        this.seaLevel = seaLevel;
+        this.setTemperature(temperature);
+        this.setHumi(humi);
 
     }
 

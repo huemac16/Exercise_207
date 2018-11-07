@@ -12,6 +12,7 @@ public class GUI extends javax.swing.JFrame {
 
     private TableModel bl = new TableModel();
     private File f = new File("/save.ser");
+    private boolean b = false;
 
     public GUI() throws IOException {
         initComponents();
@@ -42,6 +43,11 @@ public class GUI extends javax.swing.JFrame {
         miHumi = new javax.swing.JMenuItem();
 
         miHide.setText("Ausblenden");
+        miHide.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miHideActionPerformed(evt);
+            }
+        });
         jPopupMenu1.add(miHide);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -62,6 +68,7 @@ public class GUI extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        table.setComponentPopupMenu(jPopupMenu1);
         jScrollPane1.setViewportView(table);
 
         mStations.setText("Stations");
@@ -159,6 +166,20 @@ public class GUI extends javax.swing.JFrame {
         int[] values = table.getSelectedRows();
         bl.remove(values);
     }//GEN-LAST:event_miRemoveActionPerformed
+
+    private void miHideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miHideActionPerformed
+        if (b) {
+            miHide.setText("Aublenden");
+            bl.changeCols(false);
+        } else {
+            miHide.setText("Anzeigen");
+            bl.changeCols(true);
+        }
+
+        b = !b;
+
+
+    }//GEN-LAST:event_miHideActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

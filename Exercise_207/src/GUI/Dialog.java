@@ -27,7 +27,6 @@ public class Dialog extends javax.swing.JDialog {
 //        tfSeaLevel.setText("" + s.getSeaLevel());
 //        tfTemp.setText("" + s.getTemperature());
 //    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -50,14 +49,14 @@ public class Dialog extends javax.swing.JDialog {
         jLabel1.setText("Place");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weightx = 0.4;
         gridBagConstraints.weighty = 0.1;
         getContentPane().add(jLabel1, gridBagConstraints);
 
         tfPlace.setText("Bregenz");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weightx = 0.4;
         gridBagConstraints.weighty = 0.1;
         getContentPane().add(tfPlace, gridBagConstraints);
 
@@ -66,7 +65,7 @@ public class Dialog extends javax.swing.JDialog {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weightx = 0.4;
         gridBagConstraints.weighty = 0.1;
         getContentPane().add(jLabel2, gridBagConstraints);
 
@@ -75,7 +74,7 @@ public class Dialog extends javax.swing.JDialog {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weightx = 0.4;
         gridBagConstraints.weighty = 0.1;
         getContentPane().add(tfSeaLevel, gridBagConstraints);
 
@@ -84,7 +83,7 @@ public class Dialog extends javax.swing.JDialog {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weightx = 0.4;
         gridBagConstraints.weighty = 0.1;
         getContentPane().add(jLabel3, gridBagConstraints);
 
@@ -93,7 +92,7 @@ public class Dialog extends javax.swing.JDialog {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weightx = 0.4;
         gridBagConstraints.weighty = 0.1;
         getContentPane().add(tfTemp, gridBagConstraints);
 
@@ -102,7 +101,7 @@ public class Dialog extends javax.swing.JDialog {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weightx = 0.4;
         gridBagConstraints.weighty = 0.1;
         getContentPane().add(jLabel4, gridBagConstraints);
 
@@ -111,7 +110,7 @@ public class Dialog extends javax.swing.JDialog {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weightx = 0.4;
         gridBagConstraints.weighty = 0.1;
         getContentPane().add(tfHumi, gridBagConstraints);
 
@@ -125,7 +124,7 @@ public class Dialog extends javax.swing.JDialog {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weightx = 0.4;
         gridBagConstraints.weighty = 0.1;
         getContentPane().add(btOk, gridBagConstraints);
 
@@ -139,7 +138,7 @@ public class Dialog extends javax.swing.JDialog {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weightx = 0.4;
         gridBagConstraints.weighty = 0.1;
         getContentPane().add(btCancel, gridBagConstraints);
 
@@ -153,7 +152,7 @@ public class Dialog extends javax.swing.JDialog {
                     Double.parseDouble(tfTemp.getText()), Integer.parseInt(tfHumi.getText()));
             dispose();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Fehlerhafte Eingabe!");
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
 
     }//GEN-LAST:event_btOkActionPerformed
